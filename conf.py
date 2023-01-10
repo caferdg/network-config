@@ -2,6 +2,8 @@ import json
 
 # PREFERENCES
 lpPrefix = "2003::"
+ripName = "ripng"
+ospfProcess = str(1)
 
 # IMPORT NETWORK INTENT
 f = open("intent.json", "r")
@@ -54,9 +56,9 @@ for router in routers:
     ## LOOPBACK
     res.write("interface Loopback0\n no ip address\n ipv6 address "+lpPrefix+str(id)+"/128\n ipv6 enable\n")
     if(igp == "rip"):
-        res.write(" ipv6 rip ripng enable\n")
+        res.write(" ipv6 rip "+ripName+" enable\n")
     if(igp == "ospf"):
-        res.write(" ipv6 ospf 1 area 0\n")
+        res.write(" ipv6 ospf "+ospfProcess+" area 0\n")
     res.write("!\n")
     
     ## PHYSICAL INTERFACES
@@ -103,9 +105,9 @@ for router in routers:
 
             if str(link["protocol-type"]) == "igp" :
                 if igp == "rip":
-                    res.write(" ipv6 rip ripng enable\n")
+                    res.write(" ipv6 rip "+ripName+" enable\n")
                 if igp == "ospf":
-                    res.write(" ipv6 ospf 1 area 0\n")
+                    res.write(" ipv6 ospf "+ospfProcess+" area 0\n")
             
             res.write("!\n")
     
@@ -131,9 +133,9 @@ for router in routers:
 
         if isASBR :
             if(igp == "rip"):
-                res.write("  redistribute rip ripng\n")
+                res.write("  redistribute rip "+ripName+"\n")
             if(igp == "ospf"):
-                res.write("  redistribute ospf 1\n")
+                res.write("  redistribute ospf "+ospfProcess+"\n")
             res.write("  network 2001:"+str(As)+"00:"+str(As)+"00::/48\n")
             for ebgpNeighb in egpNeigbors:
                 res.write("  neighbor " + ebgpNeighb.split()[0] + " activate\n")
@@ -149,9 +151,9 @@ for router in routers:
 
     ## IGP
     if(igp == "rip"):
-        res.write("ipv6 router rip ripng\n redistribute connected\n")
+        res.write("ipv6 router rip "+ripName+"\n redistribute connected\n")
     if(igp == "ospf"):
-        res.write("ipv6 router ospf 1\n router-id "+str(id)+"."+str(id)+"."+str(id)+"."+str(id)+"\n")
+        res.write("ipv6 router ospf "+ospfProcess+"\n router-id "+str(id)+"."+str(id)+"."+str(id)+"."+str(id)+"\n")
         if isASBR: # ??
             res.write(" redistribute connected\n")
 
