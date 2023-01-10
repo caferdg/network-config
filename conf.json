@@ -13,7 +13,7 @@
             {
                 "neighbor":2,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -21,7 +21,7 @@
             {
                 "neighbor":3,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -29,7 +29,7 @@
             {
                 "neighbor":4,
                 "links":[{
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -45,7 +45,7 @@
             {
                 "neighbor":1,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -53,7 +53,7 @@
             {
                 "neighbor":3,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -69,7 +69,7 @@
             {
                 "neighbor":2,
                 "links":[{
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -77,7 +77,7 @@
             {
                 "neighbor":5,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -85,7 +85,7 @@
             {
                 "neighbor":1,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -101,7 +101,7 @@
             {
                 "neighbor":6,
                 "links":[{
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -109,7 +109,7 @@
             {
                 "neighbor":5,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -117,7 +117,7 @@
             {
                 "neighbor":1,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -125,7 +125,7 @@
             {
                 "neighbor":7,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -141,7 +141,7 @@
             {
                 "neighbor":6,
                 "links":[{
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -149,7 +149,7 @@
             {
                 "neighbor":4,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -157,7 +157,7 @@
             {
                 "neighbor":3,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -165,7 +165,7 @@
             {
                 "neighbor":7,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -181,7 +181,7 @@
             {
                 "neighbor":8,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "egp"
                 }
                 ]
@@ -189,7 +189,7 @@
             {
                 "neighbor":4,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -197,7 +197,7 @@
             {
                 "neighbor":5,
                 "links":[{ 
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -213,7 +213,7 @@
             {
                 "neighbor":9,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "egp"
                 }
                 ]
@@ -221,7 +221,7 @@
             {
                 "neighbor":4,
                 "links":[{ 
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -229,7 +229,7 @@
             {
                 "neighbor":5,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -245,7 +245,7 @@
             {
                 "neighbor":6,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "egp"
                 }
                 ]
@@ -253,7 +253,7 @@
             {
                 "neighbor":10,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -261,7 +261,7 @@
             {
                 "neighbor":11,
                 "links":[{ 
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -277,7 +277,7 @@
             {
                 "neighbor":7,
                 "links":[{
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "egp"
                 }
                 ]
@@ -285,7 +285,7 @@
             {
                 "neighbor":10,
                 "links":[{ 
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -293,7 +293,7 @@
             {
                 "neighbor":11,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -309,7 +309,7 @@
             {
                 "neighbor":8,
                 "links":[{
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -317,7 +317,7 @@
             {
                 "neighbor":9,
                 "links":[{ 
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -325,7 +325,7 @@
             {
                 "neighbor":11,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -333,7 +333,7 @@
             {
                 "neighbor":12,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -349,7 +349,7 @@
             {
                 "neighbor":8,
                 "links":[{
-                    "interface":"gigabitEthernet 3/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -357,7 +357,7 @@
             {
                 "neighbor":9,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -365,7 +365,7 @@
             {
                 "neighbor":10,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -373,7 +373,7 @@
             {
                 "neighbor":13,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -389,7 +389,7 @@
             {
                 "neighbor":14,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -397,7 +397,7 @@
             {
                 "neighbor":10,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -405,7 +405,7 @@
             {
                 "neighbor":13,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -421,7 +421,7 @@
             {
                 "neighbor":14,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -429,7 +429,7 @@
             {
                 "neighbor":11,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -437,7 +437,7 @@
             {
                 "neighbor":12,
                 "links":[{ 
-                    "interface":"fastEthernet 0/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -453,7 +453,7 @@
             {
                 "neighbor":12,
                 "links":[{ 
-                    "interface":"gigabitEthernet 1/0",
+                    "interface":"GigabitEthernet1/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -461,7 +461,7 @@
             {
                 "neighbor":13,
                 "links":[{ 
-                    "interface":"gigabitEthernet 2/0",
+                    "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
                 }
                 ]
