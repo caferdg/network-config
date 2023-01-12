@@ -47,7 +47,7 @@ for router in routers:
     isASBR = False
     egpNeigbors = []
 
-    res = open("i"+ str(id) + "_startup-config.cfg", "w")
+    res = open("./output/i"+ str(id) + "_startup-config.cfg", "w")
 
     ## CONSTANTS
     res.write("version 15.2\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nhostname R"+str(id)+"\nboot-start-marker\nboot-end-marker\nno aaa new-model\nno ip icmp rate-limit unreachable\nip cef\nno ip domain lookup\nipv6 unicast-routing\nipv6 cef\nmultilink bundle-name authenticated\nip tcp synwait-time 5\n")
