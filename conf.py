@@ -1,4 +1,5 @@
 import json
+import os
 
 # PREFERENCES
 lpPrefix = "2003::"
@@ -47,6 +48,8 @@ for router in routers:
     isASBR = False
     egpNeigbors = []
 
+    if not os.path.exists("output"):
+        os.makedirs("output")
     res = open("./output/i"+ str(id) + "_startup-config.cfg", "w")
 
     ## CONSTANTS
