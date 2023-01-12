@@ -85,7 +85,7 @@
             {
                 "neighbor":1,
                 "links":[{ 
-                    "interface":"GigabitEthernet2/0",
+                    "interface":"FastEthernet0/0",
                     "protocol-type": "igp"
                 }
                 ]
@@ -125,7 +125,7 @@
             {
                 "neighbor":7,
                 "links":[{ 
-                    "interface":"GigabitEthernet2/0",
+                    "interface":"GigabitEthernet3/0",
                     "protocol-type": "igp"
                 }
                 ]
