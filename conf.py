@@ -1,19 +1,20 @@
 import json
 import os
 
-# PREFERENCES
-lpPrefix = "2003::"
-ripName = "ripng"
-ospfProcess = str(1)
-
 # IMPORT NETWORK INTENT
 f = open("intent.json", "r")
 jsonFile = json.load(f)
 f.close()
 routers = jsonFile["routers"]
-
 nbRouter = len(routers)
 nbAs = len(jsonFile["as"])
+
+# PREFERENCES
+lpPrefix = jsonFile["preferences"]["lp-prefix"] # must be a /112 !!
+ipPrefix = jsonFile["preferences"]["ip-prefix"] # must be a /32 !!
+ripName = jsonFile["preferences"]["ripName"]
+ospfProcess = str(jsonFile["preferences"]["ospfPid"])
+
 
 matAdj = [] # Matrice contenant les numeros des sous-reseaux entre chaque routeur, (matrice symetrique)
 for k in range(0,nbRouter):
@@ -50,18 +51,18 @@ for router in routers:
 
     if not os.path.exists("output"):
         os.makedirs("output")
-    res = open("./output/i"+ str(id) + "_startup-config.cfg", "w")
+    res = open(f"./output/i{id}_startup-config.cfg", "w")
 
     ## CONSTANTS
-    res.write("version 15.2\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nhostname R"+str(id)+"\nboot-start-marker\nboot-end-marker\nno aaa new-model\nno ip icmp rate-limit unreachable\nip cef\nno ip domain lookup\nipv6 unicast-routing\nipv6 cef\nmultilink bundle-name authenticated\nip tcp synwait-time 5\n")
+    res.write(f"version 15.2\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nhostname R{id}\nboot-start-marker\nboot-end-marker\nno aaa new-model\nno ip icmp rate-limit unreachable\nip cef\nno ip domain lookup\nipv6 unicast-routing\nipv6 cef\nmultilink bundle-name authenticated\nip tcp synwait-time 5\n")
     res.write("!\n!\n!\n!\n!\n")
 
     ## LOOPBACK
-    res.write("interface Loopback0\n no ip address\n ipv6 address "+lpPrefix+str(id)+"/128\n ipv6 enable\n")
+    res.write(f"interface Loopback0\n no ip address\n ipv6 address {lpPrefix}{id}/128\n ipv6 enable\n")
     if(igp == "rip"):
-        res.write(" ipv6 rip "+ripName+" enable\n")
+        res.write(f" ipv6 rip {ripName} enable\n")
     if(igp == "ospf"):
-        res.write(" ipv6 ospf "+ospfProcess+" area 0\n")
+        res.write(f" ipv6 ospf {ospfProcess} area 0\n")
     res.write("!\n")
     
     ## PHYSICAL INTERFACES
@@ -84,7 +85,7 @@ for router in routers:
                 else : # adjacence inter AS connue
                     bloc = matAdjAs[As-1][neighbAs-1]
 
-            ip = "2001:"+str(bloc)+"00:"+str(bloc)+"00:"
+            ip = ipPrefix + str(bloc) + ":"
 
             if matAdj[id-1][neighbID-1] == 0 and matAdj[neighbID-1][id-1]==0: # sous reseau pas encore initialise
                 listeSousRes[bloc-1] += 1
@@ -104,48 +105,49 @@ for router in routers:
                 res.write(" duplex full\n")
             if str(link["interface"]).startswith("GigabitEthernet") :
                 res.write(" negotiation auto\n")
-            res.write(" ipv6 address " + ip +"/64\n ipv6 enable\n")
+            res.write(f" ipv6 address {ip}/64\n ipv6 enable\n")
 
             if str(link["protocol-type"]) == "igp" :
                 if igp == "rip":
-                    res.write(" ipv6 rip "+ripName+" enable\n")
+                    res.write(f" ipv6 rip {ripName} enable\n")
                 if igp == "ospf":
-                    res.write(" ipv6 ospf "+ospfProcess+" area 0\n")
+                    res.write(f" ipv6 ospf {ospfProcess} area 0\n")
             
             res.write("!\n")
     
     ## EGP
     if egp == "bgp":
-        res.write("router bgp " + str(As) + "\n")
-        res.write(" bgp router-id "+ str(id)+"."+str(id)+"."+str(id)+"."+str(id) + "\n")
+        res.write(f"router bgp {As}\n")
+        res.write(f" bgp router-id {id}.{id}.{id}.{id}\n")
         res.write(" bgp log-neighbor-changes\n no bgp default ipv4-unicast\n")
 
         if isASBR :
             for ebgpNeighb in egpNeigbors:
                 ipNeighb = ebgpNeighb.split()[0]
                 asNeighb = ebgpNeighb.split()[1]
-                res.write(" neighbor "+ipNeighb +" remote-as "+ asNeighb+"\n")
+                res.write(f" neighbor {ipNeighb} remote-as {asNeighb}\n")
 
         for routerID in routersInAs[As-1]:
             if routerID != id:
-                res.write(" neighbor "+lpPrefix+ str(routerID) +" remote-as "+ str(As)+"\n")
-                res.write(" neighbor "+lpPrefix+ str(routerID) +" update-source Loopback0\n")
+                res.write(f" neighbor {lpPrefix}{routerID} remote-as {As}\n")
+                res.write(f" neighbor {lpPrefix}{routerID} update-source Loopback0\n")
 
         res.write(" !\n address-family ipv4\n exit-address-family\n !\n")
         res.write(" address-family ipv6\n")
 
         if isASBR :
+            res.write("  redistribute connected\n")
             if(igp == "rip"):
-                res.write("  redistribute rip "+ripName+"\n")
+                res.write(f"  redistribute rip {ripName}\n")
             if(igp == "ospf"):
-                res.write("  redistribute ospf "+ospfProcess+"\n")
-            res.write("  network 2001:"+str(As)+"00:"+str(As)+"00::/48\n")
+                res.write(f"  redistribute ospf {ospfProcess}\n")
+            res.write(f"  network {ipPrefix}{As}::/48\n")
             for ebgpNeighb in egpNeigbors:
-                res.write("  neighbor " + ebgpNeighb.split()[0] + " activate\n")
+                res.write(f"  neighbor {ebgpNeighb.split()[0]} activate\n")
 
         for routerID in routersInAs[As-1]:
             if routerID != id:
-                res.write("  neighbor "+lpPrefix+ str(routerID) +" activate\n")
+                res.write(f"  neighbor {lpPrefix}{routerID} activate\n")
         
         res.write(" exit-address-family\n!\n")
 
@@ -154,9 +156,9 @@ for router in routers:
 
     ## IGP
     if(igp == "rip"):
-        res.write("ipv6 router rip "+ripName+"\n redistribute connected\n")
+        res.write(f"ipv6 router rip {ripName}\n redistribute connected\n")
     if(igp == "ospf"):
-        res.write("ipv6 router ospf "+ospfProcess+"\n router-id "+str(id)+"."+str(id)+"."+str(id)+"."+str(id)+"\n")
+        res.write(f"ipv6 router ospf {ospfProcess}\n router-id {id}.{id}.{id}.{id}\n")
         if isASBR: # ??
             res.write(" redistribute connected\n")
 

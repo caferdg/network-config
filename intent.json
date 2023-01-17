@@ -1,4 +1,10 @@
-{
+{   
+    "preferences":{
+        "lp-prefix": "2003::",
+        "ip-prefix": "2001:0000:",
+        "ripName": "ripng",
+        "ospfPid": 1
+    },
     "as":[
         1,
         2,
