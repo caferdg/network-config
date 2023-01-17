@@ -6,16 +6,26 @@
         "ospfPid": 1
     },
     "as":[
-        1,
-        2,
-        3
+        {
+            "id":1,
+            "igp": "rip",
+            "egp": "bgp"
+        },
+        {
+            "id":2,
+            "igp": "ospf",
+            "egp": "bgp"
+        },
+        {
+            "id":3,
+            "igp": "rip",
+            "egp": "bgp"
+        }
     ],
     "routers": [
     {
         "id":1,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":2,
@@ -46,8 +56,6 @@
     {
         "id":2,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":1,
@@ -78,8 +86,6 @@
     {
         "id":3,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":2,
@@ -110,8 +116,6 @@
     {
         "id":4,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":6,
@@ -150,8 +154,6 @@
     {
         "id":5,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":6,
@@ -190,8 +192,6 @@
     {
         "id":6,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":8,
@@ -222,8 +222,6 @@
     {
         "id":7,
         "as":1,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":9,
@@ -254,8 +252,6 @@
     {
         "id":8,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":6,
@@ -286,8 +282,6 @@
     {
         "id":9,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":7,
@@ -318,8 +312,6 @@
     {
         "id":10,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":8,
@@ -358,8 +350,6 @@
     {
         "id":11,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":8,
@@ -398,8 +388,6 @@
     {
         "id":12,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":14,
@@ -430,8 +418,6 @@
     {
         "id":13,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":14,
@@ -462,8 +448,6 @@
     {
         "id":14,
         "as":2,
-        "int-protocol":"ospf",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":12,
@@ -486,8 +470,6 @@
     {
         "id":15,
         "as":3,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":2,
@@ -518,8 +500,6 @@
     {
         "id":16,
         "as":3,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":15,
@@ -541,8 +521,6 @@
     },{
         "id":17,
         "as":3,
-        "int-protocol":"rip",
-        "border-protocol":"bgp",
         "adj":[
             {
                 "neighbor":16,

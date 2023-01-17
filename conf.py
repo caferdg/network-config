@@ -34,17 +34,13 @@ for k in range(0,nbAs):
 
 nbAdjAs = 0 # nombre d'adjacence entre AS
 
-routersInAs = [] # liste des routeurs presents dans chaque AS
-for As in jsonFile["as"]:
-    routersInAs.append([])
-    routersInAs[As-1] = [router["id"] for router in routers if router["as"]==As]
 
 for router in routers:
 
     id = router["id"]
-    igp = router["int-protocol"]
-    egp = router["border-protocol"]
     As = router["as"]
+    igp = [a["igp"] for a in jsonFile["as"] if a["id"]==As][0]
+    egp = [a["egp"] for a in jsonFile["as"] if a["id"]==As][0]
     adj = router["adj"]
     isASBR = False
     egpNeigbors = []
@@ -127,7 +123,7 @@ for router in routers:
                 asNeighb = ebgpNeighb.split()[1]
                 res.write(f" neighbor {ipNeighb} remote-as {asNeighb}\n")
 
-        for routerID in routersInAs[As-1]:
+        for routerID in [router["id"] for router in routers if router["as"]==As]:
             if routerID != id:
                 res.write(f" neighbor {lpPrefix}{routerID} remote-as {As}\n")
                 res.write(f" neighbor {lpPrefix}{routerID} update-source Loopback0\n")
@@ -145,7 +141,7 @@ for router in routers:
             for ebgpNeighb in egpNeigbors:
                 res.write(f"  neighbor {ebgpNeighb.split()[0]} activate\n")
 
-        for routerID in routersInAs[As-1]:
+        for routerID in [router["id"] for router in routers if router["as"]==As]:
             if routerID != id:
                 res.write(f"  neighbor {lpPrefix}{routerID} activate\n")
         
