@@ -1,7 +1,8 @@
 {
     "as":[
         1,
-        2
+        2,
+        3
     ],
     "routers": [
     {
@@ -460,6 +461,85 @@
             },
             {
                 "neighbor":13,
+                "links":[{ 
+                    "interface":"GigabitEthernet2/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            }
+        ]
+    },
+    {
+        "id":15,
+        "as":3,
+        "int-protocol":"rip",
+        "border-protocol":"bgp",
+        "adj":[
+            {
+                "neighbor":2,
+                "links":[{ 
+                    "interface":"FastEthernet0/0",
+                    "protocol-type": "egp"
+                }
+                ]
+            },
+            {
+                "neighbor":17,
+                "links":[{ 
+                    "interface":"GigabitEthernet2/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            },
+            {
+                "neighbor":16,
+                "links":[{ 
+                    "interface":"GigabitEthernet1/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            }
+        ]
+    },
+    {
+        "id":16,
+        "as":3,
+        "int-protocol":"rip",
+        "border-protocol":"bgp",
+        "adj":[
+            {
+                "neighbor":15,
+                "links":[{ 
+                    "interface":"GigabitEthernet2/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            },
+            {
+                "neighbor":17,
+                "links":[{ 
+                    "interface":"GigabitEthernet1/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            }
+        ]
+    },{
+        "id":17,
+        "as":3,
+        "int-protocol":"rip",
+        "border-protocol":"bgp",
+        "adj":[
+            {
+                "neighbor":16,
+                "links":[{ 
+                    "interface":"GigabitEthernet1/0",
+                    "protocol-type": "igp"
+                }
+                ]
+            },
+            {
+                "neighbor":15,
                 "links":[{ 
                     "interface":"GigabitEthernet2/0",
                     "protocol-type": "igp"
