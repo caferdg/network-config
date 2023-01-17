@@ -58,6 +58,14 @@
                     "protocol-type": "igp"
                 }
                 ]
+            },
+            {
+                "neighbor":15,
+                "links":[{ 
+                    "interface":"FastEthernet0/0",
+                    "protocol-type": "egp"
+                }
+                ]
             }
         ]
     },
