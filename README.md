@@ -1,7 +1,12 @@
 # scripting-routage
-Projet 3TC routage réseaux
+Script Python permettant de générer les fichiers de configurations Cisco en fonction d'un fichier d'intentions décrivant les interactions entre les routeurs.
 
 Pour générer les fichiers de config Cisco :
-`python3 conf.py`
+`python3 conf.py <intentFile> <outputDirPath>`
 
-Résultats dans ./output
+Exemple : 
+`python3 conf.py intent.json ./output`
+
+Règles pour le fichier d'intentions :
+ - "lp-prefix" doit être une adresse à 112 bits (7 blocs de 16 bits)
+ - "ip-prefix" doit être une adresse à 32 bits, le :: n'est pas toléré ici

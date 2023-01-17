@@ -1,8 +1,11 @@
 import json
 import os
+import sys
 
 # IMPORT NETWORK INTENT
-f = open("intent.json", "r")
+intent = sys.argv[1]
+outputPath = sys.argv[2]
+f = open(intent, "r")
 jsonFile = json.load(f)
 f.close()
 routers = jsonFile["routers"]
@@ -45,9 +48,9 @@ for router in routers:
     isASBR = False
     egpNeigbors = []
 
-    if not os.path.exists("output"):
-        os.makedirs("output")
-    res = open(f"./output/i{id}_startup-config.cfg", "w")
+    if not os.path.exists(outputPath):
+        os.makedirs(outputPath)
+    res = open(f"{outputPath}/i{id}_startup-config.cfg", "w")
 
     ## CONSTANTS
     res.write(f"version 15.2\nservice timestamps debug datetime msec\nservice timestamps log datetime msec\nhostname R{id}\nboot-start-marker\nboot-end-marker\nno aaa new-model\nno ip icmp rate-limit unreachable\nip cef\nno ip domain lookup\nipv6 unicast-routing\nipv6 cef\nmultilink bundle-name authenticated\nip tcp synwait-time 5\n")
