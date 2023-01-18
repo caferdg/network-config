@@ -1,7 +1,6 @@
 {   
     "preferences":{
         "lp-prefix": "2003::",
-        "ip-prefix": "2001:0000:",
         "ripName": "ripng",
         "ospfPid": 1
     },
@@ -9,17 +8,20 @@
         {
             "id":1,
             "igp": "rip",
-            "egp": "bgp"
+            "egp": "bgp",
+            "ip-prefix": "2001:0:100:"
         },
         {
             "id":2,
             "igp": "ospf",
-            "egp": "bgp"
+            "egp": "bgp",
+            "ip-prefix": "2001:0:200:"
         },
         {
             "id":3,
             "igp": "rip",
-            "egp": "bgp"
+            "egp": "bgp",
+            "ip-prefix": "2001:0:300:"
         }
     ],
     "routers": [

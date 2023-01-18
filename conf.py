@@ -1,6 +1,8 @@
-import json
-import os
-import sys
+import json, os, sys
+
+if len(sys.argv) != 3:
+    print("Usage: python3 conf.py <intentFile> <outputDir>")
+    exit(1)
 
 # IMPORT NETWORK INTENT
 intent = sys.argv[1]
@@ -9,15 +11,18 @@ f = open(intent, "r")
 jsonFile = json.load(f)
 f.close()
 routers = jsonFile["routers"]
+autoSys = jsonFile["as"]
 nbRouter = len(routers)
-nbAs = len(jsonFile["as"])
+nbAs = len(autoSys)
 
 # PREFERENCES
 lpPrefix = jsonFile["preferences"]["lp-prefix"] # must be a /112 !!
-ipPrefix = jsonFile["preferences"]["ip-prefix"] # must be a /32 !!
 ripName = jsonFile["preferences"]["ripName"]
 ospfProcess = str(jsonFile["preferences"]["ospfPid"])
-
+asInf = dict()
+for i in range(nbAs):
+    as_ = autoSys[i]
+    asInf[as_["id"]] = dict(prefix = as_["ip-prefix"], index = i)
 
 matAdj = [] # Matrice contenant les numeros des sous-reseaux entre chaque routeur, (matrice symetrique)
 for k in range(0,nbRouter):
@@ -29,21 +34,20 @@ listeSousRes = [] # Liste contenant les compteurs sous-reseaux utilises pour cha
 for k in range(0,nbAs):
     listeSousRes.append(0)
 
-matAdjAs = [] # Matrice contenant les numeros d'adjacence entre AS
+matAdjAs = [] # Matrice contenant les prefixes des sous-reseaux entre chaque AS, (matrice symetrique)
 for k in range(0,nbAs):
     matAdjAs.append([])
     for j in range(nbAs):
-        matAdjAs[k].append(0)
+        matAdjAs[k].append("")
 
 nbAdjAs = 0 # nombre d'adjacence entre AS
-
 
 for router in routers:
 
     id = router["id"]
     As = router["as"]
-    igp = [a["igp"] for a in jsonFile["as"] if a["id"]==As][0]
-    egp = [a["egp"] for a in jsonFile["as"] if a["id"]==As][0]
+    igp = [a["igp"] for a in autoSys if a["id"]==As][0]
+    egp = [a["egp"] for a in autoSys if a["id"]==As][0]
     adj = router["adj"]
     isASBR = False
     egpNeigbors = []
@@ -68,27 +72,26 @@ for router in routers:
     for adj in router["adj"]:
         neighbID = adj["neighbor"]
         neighbAs = [router["as"] for router in routers if router["id"]==neighbID][0]
+        preferedAs = As # used for choosing the ip prefixes (either As or neighbAs)
+        asInd = asInf[As]["index"]
+        neighbAsInd = asInf[neighbAs]["index"]
 
         for link in adj["links"]:
 
             ## IP GENERATION
             if str(link["protocol-type"]) == "igp": # routeur a l'interieur de l'AS (pas ASBR)
-                bloc = As
+                ip = asInf[As]["prefix"]
             if str(link["protocol-type"]) == "egp": # routeur en bordure d'AS
                 isASBR = True
-                if matAdjAs[As-1][neighbAs-1] == 0 and matAdjAs[neighbAs-1][As-1]==0: # adjacence inter AS pas encore initialise
-                    nbAdjAs += 1
-                    bloc = nbAs + nbAdjAs
-                    matAdjAs[As-1][neighbAs-1], matAdjAs[neighbAs-1][As-1] = bloc, bloc
-                    listeSousRes.append(0)
+                if matAdjAs[asInd][neighbAsInd] == "" and matAdjAs[neighbAsInd][asInd]=="": # adjacence inter AS pas encore initialise
+                    ip = asInf[preferedAs]["prefix"]
+                    matAdjAs[asInd][neighbAsInd], matAdjAs[neighbAsInd][asInd] = ip, ip
                 else : # adjacence inter AS connue
-                    bloc = matAdjAs[As-1][neighbAs-1]
-
-            ip = ipPrefix + str(bloc) + ":"
+                    ip = matAdjAs[asInd][neighbAsInd]
 
             if matAdj[id-1][neighbID-1] == 0 and matAdj[neighbID-1][id-1]==0: # sous reseau pas encore initialise
-                listeSousRes[bloc-1] += 1
-                matAdj[id-1][neighbID-1], matAdj[neighbID-1][id-1] = listeSousRes[bloc-1], listeSousRes[bloc-1]
+                listeSousRes[asInf[preferedAs]["index"]] += 1
+                matAdj[id-1][neighbID-1], matAdj[neighbID-1][id-1] = listeSousRes[asInf[preferedAs]["index"]], listeSousRes[asInf[preferedAs]["index"]]
                 ip += str(matAdj[id-1][neighbID-1]) + "::1"
                 if isASBR and str(link["protocol-type"]) == "egp":
                     egpNeigbors.append(ip[:-1] + "2" + " " + str(neighbAs))
@@ -96,7 +99,7 @@ for router in routers:
                 ip += str(matAdj[id-1][neighbID-1]) + "::2"
                 if isASBR and str(link["protocol-type"]) == "egp":
                     egpNeigbors.append(ip[:-1] + "1" + " "+ str(neighbAs))
-
+            
             # INTERFACE
             res.write("interface " + str(link["interface"]) + "\n")
             res.write(" no ip address\n")
@@ -140,7 +143,7 @@ for router in routers:
                 res.write(f"  redistribute rip {ripName}\n")
             if(igp == "ospf"):
                 res.write(f"  redistribute ospf {ospfProcess}\n")
-            res.write(f"  network {ipPrefix}{As}::/48\n")
+            res.write("  network " + asInf[As]["prefix"] + ":/48\n")
             for ebgpNeighb in egpNeigbors:
                 res.write(f"  neighbor {ebgpNeighb.split()[0]} activate\n")
 
