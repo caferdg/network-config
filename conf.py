@@ -19,7 +19,7 @@ nbAs = len(autoSys)
 lpPrefix = jsonFile["preferences"]["lp-prefix"] # must be a /112 !!
 ripName = jsonFile["preferences"]["ripName"]
 ospfProcess = str(jsonFile["preferences"]["ospfPid"])
-asInf = dict()
+asInf = dict() # dictionnary containing the ip prefix and the index of each AS
 for i in range(nbAs):
     as_ = autoSys[i]
     asInf[as_["id"]] = dict(prefix = as_["ip-prefix"], index = i)
@@ -39,8 +39,6 @@ for k in range(0,nbAs):
     matAdjAs.append([])
     for j in range(nbAs):
         matAdjAs[k].append("")
-
-nbAdjAs = 0 # nombre d'adjacence entre AS
 
 for router in routers:
 
