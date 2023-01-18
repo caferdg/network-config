@@ -17,7 +17,6 @@ Règles pour le fichier d'intentions :
  - "ip-prefix" doit être une adresse à 32 bits, **le :: n'est pas toléré ici !**
 
 ## To do
- - 1 ip prefix par AS
  - intentions de ebgp avec des clients étrangers (ie on ne connait que l'interface, l'AS du client, l'ip du client)
  - OSPF metrics
  - BGP policies (local_pref surtout)
