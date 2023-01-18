@@ -14,7 +14,7 @@ Exemple :
 ## Règles
 Règles pour le fichier d'intentions :
  - "lp-prefix" doit être une adresse à 112 bits (7 blocs de 16 bits)
- - "ip-prefix" doit être une adresse à 32 bits, **le :: n'est pas toléré ici !**
+ - "ip-prefix" doit être une adresse à 48 bits, **le :: n'est pas toléré ici !**
 
 ## To do
  - intentions de ebgp avec des clients étrangers (ie on ne connait que l'interface, l'AS du client, l'ip du client)
