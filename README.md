@@ -1,23 +1,28 @@
 # scripting-routage
 
 ## A propos
-Script Python permettant de générer les fichiers de configurations Cisco en fonction d'un fichier d'intentions décrivant les interactions entre les routeurs.
+Python script that generates Cisco routers' startup-config files according to network intents described in a json file.
 
 
 ## Execution
-Pour générer les fichiers de config Cisco :
-`python3 conf.py <intentFile> <outputDirPath>`
+`python3 conf.py <intentFile> <outputDir>`
 
-Exemple : 
+Example : 
 `python3 conf.py intent.json ./output`
 
-## Règles
-Règles pour le fichier d'intentions :
- - "lp-prefix" doit être une adresse à 112 bits (7 blocs de 16 bits)
- - "ip-prefix" doit être une adresse à 48 bits, **le :: n'est pas toléré ici !**
+## Quick deployment in a GNS project
+`python3 deploy.py <confFilesDir> <projectName>`
+
+Example : 
+`python3 deploy.py output my-gns-project`
+
+## Rules
+Rules for the intent file :
+ - "lp-prefix" must be 112 bits (7 blocks of 16 bits)
+ - For each autonomous system "ip-prefix" must be 48 bits **:: is forbidden!**
 
 ## To do
- - drag/drop script (dynamic, finds directories itself according to router id)
- - intentions de ebgp avec des clients étrangers (ie on ne connait que l'interface, l'AS du client, l'ip du client)
+ - telnet 
+ - ebgp with a stranger client (ip address, interface, neighbor's as)
  - OSPF metrics
- - BGP policies (local_pref surtout)
+ - BGP policies (local_pref, filters)
