@@ -18,8 +18,8 @@ Example :
 
 ## Rules
 Rules for the intent file :
- - "lp-prefix" must be 112 bits (7 blocks of 16 bits)
- - For each autonomous system "ip-prefix" must be 48 bits **:: is forbidden!**
+ - `lp-prefix` must be 112 bits (7 blocks of 16 bits)
+ - For each autonomous system `ip-prefix` must be 48 bits **:: is forbidden!**
 
 ## To do
  - telnet 
