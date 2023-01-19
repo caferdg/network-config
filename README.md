@@ -1,6 +1,6 @@
 # scripting-routage
 
-## A propos
+## About
 Python script that generates Cisco routers' startup-config files according to network intents described in a json file.
 
 
