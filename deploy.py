@@ -8,7 +8,11 @@ confDir = sys.argv[1]
 if confDir.endswith("/"):
     confDir = confDir[:-1]
 projectName = sys.argv[2]
-dynamipsPath = os.path.expanduser('~') + "/GNS3/projects/" + projeactName + "/project-files/dynamips/"
+dynamipsPath = os.path.expanduser('~') + "/GNS3/projects/" + projectName + "/project-files/dynamips/"
+
+if not os.path.exists(os.path.expanduser('~') + "/GNS3/projects/" + projectName):
+    print("GNS project directory not found!")
+    exit(1)
 
 if len(os.listdir(confDir))==0:
     print("Configurations' directory empty, you must first generate these files.")
