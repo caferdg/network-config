@@ -167,3 +167,5 @@ for router in routers:
     res.write("control-plane\nline con 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline aux 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline vty 0 4\n login\n!\nend")
     
     res.close()
+    
+print(f"Done, {nbRouter} configuration files generated in {outputPath} !")
