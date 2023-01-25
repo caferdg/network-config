@@ -153,6 +153,7 @@ for router in routers:
                 myCustoms = [a["customers"] for a in autoSys if a["id"]==As][0]
                 myPeers = [a["peers"] for a in autoSys if a["id"]==As][0]
                 myProviders = [a["providers"] for a in autoSys if a["id"]==As][0]
+
                 if int(ebgpNeighb.split()[1]) in myCustoms:
                     res.write(f"  neighbor {ebgpNeighb.split()[0]} route-map CUSTOMERS in\n")
                 elif int(ebgpNeighb.split()[1]) in myPeers:
@@ -167,10 +168,6 @@ for router in routers:
         
         res.write(" exit-address-family\n!\n")
 
-        
-
-
-    
     res.write("ip forward-protocol nd\nno ip http server\nno ip http secure-server\n!\n")
 
     ## IGP
@@ -193,3 +190,5 @@ for router in routers:
     res.write("control-plane\nline con 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline aux 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline vty 0 4\n login\n!\nend")
     
     res.close()
+
+    print(f"Router {id} generated")
