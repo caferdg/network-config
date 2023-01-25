@@ -41,9 +41,9 @@
             "igp": "rip",
             "egp": "bgp",
             "ip-prefix": "2001:0:400:",
-            "customers":[3],
-            "peers":[2],
-            "providers":[4]
+            "customers":[1],
+            "peers":[],
+            "providers":[]
         }
     ],
     "routers": [
