@@ -14,6 +14,9 @@ routers = jsonFile["routers"]
 autoSys = jsonFile["as"]
 nbRouter = len(routers)
 nbAs = len(autoSys)
+customPref = jsonFile["preferences"]["custom-pref"]
+peerPref = jsonFile["preferences"]["peer-pref"]
+providerPref = jsonFile["preferences"]["provider-pref"]
 
 # PREFERENCES
 lpPrefix = jsonFile["preferences"]["lp-prefix"] # must be a /112 !!
@@ -147,12 +150,25 @@ for router in routers:
             res.write("  network " + asInf[As]["prefix"] + ":/48\n")
             for ebgpNeighb in egpNeigbors:
                 res.write(f"  neighbor {ebgpNeighb.split()[0]} activate\n")
+                myCustoms = [a["customers"] for a in autoSys if a["id"]==As][0]
+                myPeers = [a["peers"] for a in autoSys if a["id"]==As][0]
+                myProviders = [a["providers"] for a in autoSys if a["id"]==As][0]
+                if int(ebgpNeighb.split()[1]) in myCustoms:
+                    res.write(f"  neighbor {ebgpNeighb.split()[0]} route-map CUSTOMERS in\n")
+                elif int(ebgpNeighb.split()[1]) in myPeers:
+                    res.write(f"  neighbor {ebgpNeighb.split()[0]} route-map PEERS in\n")
+                elif int(ebgpNeighb.split()[1]) in myProviders:
+                    res.write(f"  neighbor {ebgpNeighb.split()[0]} route-map PROVIDERS in\n")
+                
 
         for routerID in [router["id"] for router in routers if router["as"]==As]:
             if routerID != id:
                 res.write(f"  neighbor {lpPrefix}{routerID} activate\n")
         
         res.write(" exit-address-family\n!\n")
+
+        
+
 
     
     res.write("ip forward-protocol nd\nno ip http server\nno ip http secure-server\n!\n")
@@ -164,6 +180,13 @@ for router in routers:
         res.write(f"ipv6 router ospf {ospfProcess}\n router-id {id}.{id}.{id}.{id}\n")
         if isASBR: # ??
             res.write(" redistribute connected\n")
+    res.write("!\n")
+
+    if isASBR :
+        ## ROUTE-MAPS
+        res.write(f"route-map CUSTOMERS permit 10\n set local-preference {customPref}\n!\n")
+        res.write(f"route-map PEERS permit 10\n set local-preference {peerPref}\n!\n")
+        res.write(f"route-map PROVIDERS permit 10\n set local-preference {providerPref}\n!\n")
 
     res.write("!\n")
 

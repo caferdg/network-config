@@ -2,7 +2,10 @@
     "preferences":{
         "lp-prefix": "2003::",
         "ripName": "ripng",
-        "ospfPid": 1
+        "ospfPid": 1,
+        "custom-pref": 150,
+        "peer-pref": 100,
+        "provider-pref": 50
     },
     "as":[
         {
@@ -10,7 +13,7 @@
             "igp": "rip",
             "egp": "bgp",
             "ip-prefix": "2001:0:100:",
-            "clients":[3],
+            "customers":[3],
             "peers":[2],
             "providers":[4]
         },
@@ -19,7 +22,7 @@
             "igp": "ospf",
             "egp": "bgp",
             "ip-prefix": "2001:0:200:",
-            "clients":[],
+            "customers":[],
             "peers":[1],
             "providers":[]
         },
@@ -28,7 +31,7 @@
             "igp": "rip",
             "egp": "bgp",
             "ip-prefix": "2001:0:300:",
-            "clients":[],
+            "customers":[],
             "peers":[],
             "providers":[1]
             
@@ -38,7 +41,7 @@
             "igp": "rip",
             "egp": "bgp",
             "ip-prefix": "2001:0:400:",
-            "clients":[3],
+            "customers":[3],
             "peers":[2],
             "providers":[4]
         }
