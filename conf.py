@@ -112,8 +112,9 @@ for router in routers:
                     res.write(f" ipv6 rip {ripName} enable\n")
                 if igp == "ospf":
                     res.write(f" ipv6 ospf {ospfProcess} area 0\n")
-                    if link["ospf-metric"]: # OSPF metric is optional
-                        res.write(f" ipv6 ospf cost {link["ospf-metric"]}\n")
+                    if "ospf-metric" in link.keys(): # OSPF metric is optional
+                        cost = link["ospf-metric"]
+                        res.write(f" ipv6 ospf cost {cost}\n")
             
             res.write("!\n")
     
