@@ -112,6 +112,8 @@ for router in routers:
                     res.write(f" ipv6 rip {ripName} enable\n")
                 if igp == "ospf":
                     res.write(f" ipv6 ospf {ospfProcess} area 0\n")
+                    if link["ospf-metric"]: # OSPF metric is optional
+                        res.write(f" ipv6 ospf cost {link["ospf-metric"]}\n")
             
             res.write("!\n")
     
@@ -167,5 +169,3 @@ for router in routers:
     res.write("control-plane\nline con 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline aux 0\n exec-timeout 0 0\n privilege level 15\n logging synchronous\n stopbits 1\nline vty 0 4\n login\n!\nend")
     
     res.close()
-    
-print(f"Done, {nbRouter} configuration files generated in {outputPath} !")
