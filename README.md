@@ -1,8 +1,13 @@
-# scripting-routage
+# Network configuration 
 
 ## About
-Python script that generates Cisco routers' startup-config files according to network intents described in a json file.
+Python script that generates Cisco routers' startup-config files according to network intents described in a JSON file.
 
+## Features
+ - BGP, OSPFv3, RIPng
+ - Auto IP generation following an autonomous system (AS) IP prefix
+ - Local preference configuration according to relationships (customer, peer or provider) with the adjacent AS
+ - OSPF metric configuration
 
 ## Execution
 `python3 conf.py <intentFile> <outputDir>`
