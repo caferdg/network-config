@@ -28,6 +28,4 @@ Rules for the intent file :
 
 ## To do
  - telnet 
- - ebgp with a stranger client (ip address, interface, neighbor's as)
- - OSPF metrics
- - BGP policies (local_pref, filters)
+
