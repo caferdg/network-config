@@ -1,7 +1,7 @@
 # Network configuration 
 
 ## About
-Python script that generates Cisco routers' startup-config files according to network intents described in a JSON file.
+Python script that generates Cisco routers' startup-config files according to network intents described in a JSON file. Useful in a network where you have several autonomous systems with different relationships (customers, peers, providers), different IGP (OSPF, RIP).
 
 ## Features
  - BGP, OSPFv3, RIPng
@@ -27,5 +27,4 @@ Rules for the intent file :
  - For each autonomous system `ip-prefix` must be 48 bits **:: is forbidden!**
 
 ## To do
- - telnet 
-
+ - IPv4
